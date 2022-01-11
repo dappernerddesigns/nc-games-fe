@@ -9,3 +9,7 @@
   float: left;
   padding-bottom: 12px;
 }
+
+.review-img {
+  max-width: 100%;
+}

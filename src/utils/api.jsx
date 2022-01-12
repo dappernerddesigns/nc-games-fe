@@ -30,7 +30,12 @@ export const AllUsers = () => {
 
 export const ReviewByID = (reviewID) => {
   return gamesApi.get(`/reviews/${reviewID}`).then((res) => {
-    console.log(res.data.review[0])
     return res.data.review[0]
+  })
+}
+
+export const CommentsByReview = (reviewID) => {
+  return gamesApi.get(`/reviews/${reviewID}/comments`).then((res) => {
+    return res.data.comments
   })
 }

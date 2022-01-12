@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const CardContainer = styled.div`
   border: 1px solid red;

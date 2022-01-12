@@ -22,7 +22,7 @@ export const Categories = () => {
         <div>
           <ul>
             {cats.map((cat) => {
-              return <CatCard cat={cat} />
+              return <CatCard cat={cat} key={cat.slug} />
             })}
           </ul>
 

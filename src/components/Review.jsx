@@ -3,20 +3,29 @@ import styled, { css } from 'styled-components'
 import { useState, useEffect } from 'react'
 import { ReviewByID } from '../utils/api'
 import Loading from '../img/loading.svg'
+import { Comments } from './Comments'
 
 export const Review = () => {
   const params = useParams()
 
   const [isLoading, setIsLoading] = useState(true)
   const [OneReview, setOneReview] = useState({})
-
+  const [showComment, setShowComment] = useState(false)
   useEffect(() => {
     ReviewByID(params.review_id).then((result) => {
       setIsLoading(false)
       setOneReview(result)
-      console.log(result)
     })
   }, [])
+
+  function isClicked() {
+    if (showComment === false) {
+      setShowComment(true)
+    } else {
+      setShowComment(false)
+    }
+  }
+
   return (
     <>
       {isLoading ? (
@@ -28,6 +37,17 @@ export const Review = () => {
           <p>Game Designer: {OneReview.designer}</p>
           <img className="review-img" src={OneReview.review_img_url} />
           <p>{OneReview.review_body}</p>
+          <p>Votes : {OneReview.votes}</p>
+          <button>UpVote!</button>
+          <button>DownVote!</button>
+          <p>Comments: {OneReview.comment_count}</p>
+          {showComment ? null : (
+            <button onClick={isClicked}>Show comments</button>
+          )}
+          {showComment ? (
+            <button onClick={isClicked}>Hide comments</button>
+          ) : null}
+          {showComment ? <Comments /> : null}
           <Link to="/">
             <button>Home</button>
           </Link>

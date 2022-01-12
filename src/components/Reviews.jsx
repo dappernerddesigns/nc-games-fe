@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router-dom'
 export const Reviews = () => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
 
   const category = searchParams.get('category')
 
@@ -24,7 +24,7 @@ export const Reviews = () => {
         setReviews(res)
       })
     }
-  }, [])
+  }, [category])
 
   return (
     <>
@@ -35,7 +35,7 @@ export const Reviews = () => {
           <h1>All reviews</h1>
           <ul>
             {reviews.map((review) => {
-              return <ReviewCard review={review} />
+              return <ReviewCard review={review} key={review.review_id} />
             })}
           </ul>
           <Link to="/">

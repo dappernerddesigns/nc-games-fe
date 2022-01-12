@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { ReviewByID } from '../utils/api'
 import Loading from '../img/loading.svg'
 import { Comments } from './Comments'
+import { Votes } from './Votes'
 
 export const Review = () => {
   const params = useParams()
@@ -11,6 +12,7 @@ export const Review = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [OneReview, setOneReview] = useState({})
   const [showComment, setShowComment] = useState(false)
+
   useEffect(() => {
     ReviewByID(params.review_id).then((result) => {
       setIsLoading(false)
@@ -37,10 +39,11 @@ export const Review = () => {
           <p>Game Designer: {OneReview.designer}</p>
           <img className="review-img" src={OneReview.review_img_url} />
           <p>{OneReview.review_body}</p>
-          <p>Votes : {OneReview.votes}</p>
-          <button>UpVote!</button>
-          <button>DownVote!</button>
           <p>Comments: {OneReview.comment_count}</p>
+
+          {OneReview.review_id && (
+            <Votes votes={OneReview.votes} review_id={OneReview.review_id} />
+          )}
           {showComment ? null : (
             <button onClick={isClicked}>Show comments</button>
           )}
@@ -48,6 +51,7 @@ export const Review = () => {
             <button onClick={isClicked}>Hide comments</button>
           ) : null}
           {showComment ? <Comments /> : null}
+
           <Link to="/">
             <button>Home</button>
           </Link>

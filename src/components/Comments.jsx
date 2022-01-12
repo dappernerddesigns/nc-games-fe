@@ -14,7 +14,6 @@ export const Comments = () => {
     CommentsByReview(review_id).then((res) => {
       setComments(res)
       setIsLoading(false)
-      console.log(res)
     })
   }, [])
 

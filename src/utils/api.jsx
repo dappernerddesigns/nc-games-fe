@@ -39,3 +39,10 @@ export const CommentsByReview = (reviewID) => {
     return res.data.comments
   })
 }
+
+export const ReviewVotes = (reviewID) => {
+  return gamesApi.patch(`/reviews/${reviewID}`).then((res) => {
+    console.log(res.data.reviews[0].votes)
+    return res.data.reviews[0]
+  })
+}

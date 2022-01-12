@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { CommentsByReview } from '../utils/api'
+import { CommentsByReview, AddComment } from '../utils/api'
 import { CommentCard } from './CommentCard'
 import Loading from '../img/loading.svg'
+import { PostComment } from './PostComment'
 
 export const Comments = () => {
   const { review_id } = useParams()
@@ -17,12 +18,21 @@ export const Comments = () => {
     })
   }, [])
 
+  const addComment = (text) => {
+    console.log('user commented>>', text)
+    AddComment(review_id, text).then((res) => {
+      setComments([res, ...comments])
+    })
+  }
   return (
     <>
       {isLoading ? (
         <img src={Loading} />
       ) : (
         <div>
+          <div className="comments-form">
+            <PostComment submitLabel="Write" handleSubmit={addComment} />
+          </div>
           <ul>
             {comments.map((comment) => {
               return <CommentCard comment={comment} key={comment.comment_id} />

@@ -48,3 +48,15 @@ export const ReviewVotes = (reviewID, num) => {
       return res.data.reviews[0].votes
     })
 }
+
+export const AddComment = (reviewID, comment) => {
+  return gamesApi
+    .post(`/reviews/${reviewID}/comments`, {
+      username: 'jessjelly',
+      body: comment,
+    })
+    .then((res) => {
+      console.log(res.data)
+      return res.data.comments
+    })
+}

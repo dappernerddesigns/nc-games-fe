@@ -18,7 +18,7 @@ export const Review = () => {
       setIsLoading(false)
       setOneReview(result)
     })
-  }, [])
+  }, [params.review_id])
 
   function isClicked() {
     if (showComment === false) {
@@ -27,7 +27,7 @@ export const Review = () => {
       setShowComment(false)
     }
   }
-  console.log(OneReview.votes)
+
   return (
     <>
       {isLoading ? (

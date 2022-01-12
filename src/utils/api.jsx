@@ -16,6 +16,12 @@ export const AllReviews = () => {
   })
 }
 
+export const AllReviewsByCat = (category) => {
+  return gamesApi.get(`/reviews?category=${category}`).then((res) => {
+    return res.data.reviews
+  })
+}
+
 export const AllUsers = () => {
   return gamesApi.get(`/users`).then((res) => {
     return res.data.users

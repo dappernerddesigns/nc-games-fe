@@ -9,12 +9,14 @@ const CardContainer = styled.div`
     rgba(255, 255, 255, 0.3)
   );
   border-radius: 1rem;
-  margin: 15px;
-  padding: 12px;
+  margin-bottom: 20px;
+  padding: 15px;
+  width: 85%;
 `
 const Header = styled.h2`
   text-transform: capitalize;
   color: #222629;
+  text-align: center;
 `
 const Paragraph = styled.p`
   color: #222629;
@@ -26,7 +28,7 @@ export const CatCard = ({ cat }) => {
       <Link to={`/reviews?category=${cat.slug}`}>
         <CardContainer>
           <Header>{cat.slug}</Header>
-          <Paragraph>{cat.description}</Paragraph>
+          {<Paragraph>{cat.description}</Paragraph>}
         </CardContainer>
       </Link>
     </>

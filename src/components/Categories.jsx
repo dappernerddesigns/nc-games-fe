@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import { CatCard } from './CatCard'
 import { AllCategories } from '../utils/api'
 import Loading from '../img/loading.svg'
+import styled from 'styled-components'
+
+const CatDisplay = styled.div``
 
 export const Categories = () => {
   const [cats, setCat] = useState([])
@@ -19,7 +22,8 @@ export const Categories = () => {
       {isLoading ? (
         <img src={Loading} />
       ) : (
-        <div>
+        <CatDisplay>
+          <h1>Reviews by Category</h1>
           <ul>
             {cats.map((cat) => {
               return <CatCard cat={cat} key={cat.slug} />
@@ -29,7 +33,7 @@ export const Categories = () => {
           <Link to="/">
             <button>Home</button>
           </Link>
-        </div>
+        </CatDisplay>
       )}
     </>
   )

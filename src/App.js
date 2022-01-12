@@ -10,10 +10,7 @@ import { Users } from './components/Users'
 import { Comments } from './components/Comments'
 import styled, { css } from 'styled-components'
 
-const AppStyles = styled.div`
-  min-height: 100vh;
-  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
-`
+const AppStyles = styled.div``
 function App() {
   return (
     <BrowserRouter>

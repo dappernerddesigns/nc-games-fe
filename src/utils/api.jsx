@@ -44,7 +44,6 @@ export const ReviewVotes = (reviewID, num) => {
   return gamesApi
     .patch(`/reviews/${reviewID}`, { inc_votes: num })
     .then((res) => {
-      console.log(res.data.reviews[0].votes)
       return res.data.reviews[0].votes
     })
 }

@@ -2,8 +2,15 @@ import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 const CardContainer = styled.div`
-  border: 1px solid red;
+  background-color: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 1rem;
   margin: 15px;
+  padding: 12px;
 `
 const Header = styled.h2`
   text-transform: capitalize;

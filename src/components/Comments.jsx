@@ -4,6 +4,7 @@ import { CommentsByReview, AddComment } from '../utils/api'
 import { CommentCard } from './CommentCard'
 import Loading from '../img/loading.svg'
 import { PostComment } from './PostComment'
+import styled from 'styled-components'
 
 export const Comments = () => {
   const { review_id } = useParams()
@@ -33,11 +34,15 @@ export const Comments = () => {
           <div className="comments-form">
             <PostComment submitLabel="Write" handleSubmit={addComment} />
           </div>
-          <ul>
-            {comments.map((comment) => {
-              return <CommentCard comment={comment} key={comment.comment_id} />
-            })}
-          </ul>
+          <div>
+            <ul>
+              {comments.map((comment) => {
+                return (
+                  <CommentCard comment={comment} key={comment.comment_id} />
+                )
+              })}
+            </ul>
+          </div>
         </div>
       )}
     </>

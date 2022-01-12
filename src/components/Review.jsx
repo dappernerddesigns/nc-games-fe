@@ -6,6 +6,16 @@ import Loading from '../img/loading.svg'
 import { Comments } from './Comments'
 import { Votes } from './Votes'
 
+const VoteDisplay = styled.div`
+  border: 1px solid red;
+  width: 15%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: none;
+  color: white;
+  font-size: 1.2rem;
+`
+
 export const Review = () => {
   const params = useParams()
 
@@ -34,16 +44,18 @@ export const Review = () => {
         <img src={Loading} />
       ) : (
         <div>
+          <VoteDisplay>
+            {OneReview.review_id && (
+              <Votes votes={OneReview.votes} review_id={OneReview.review_id} />
+            )}
+          </VoteDisplay>
           <h2>{OneReview.title}</h2>
           <p>Contributor: {OneReview.owner}</p>
           <p>Game Designer: {OneReview.designer}</p>
           <img className="review-img" src={OneReview.review_img_url} />
           <p>{OneReview.review_body}</p>
-          <p>Comments: {OneReview.comment_count}</p>
 
-          {OneReview.review_id && (
-            <Votes votes={OneReview.votes} review_id={OneReview.review_id} />
-          )}
+          <p>Comments: {OneReview.comment_count}</p>
           {showComment ? null : (
             <button onClick={isClicked}>Show comments</button>
           )}

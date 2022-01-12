@@ -19,7 +19,7 @@ export const Votes = ({ votes, review_id }) => {
       <span className="votes" onClick={upVote}>
         <i className="fas fa-arrow-up"></i>
       </span>
-      <p>Votes : {userVotes}</p>
+      <p>{userVotes}</p>
       <span className="votes" onClick={downVote}>
         <i className="fas fa-arrow-down"></i>
       </span>

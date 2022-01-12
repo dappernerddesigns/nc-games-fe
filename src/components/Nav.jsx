@@ -12,14 +12,6 @@ const Header = styled.h1`
   color: #86c232;
   font-size: 2rem;
 `
-const NavLink = styled.a`
-  color: #86c232;
-  margin: 8px;
-  font-size: 1.5rem;
-  text-decoration: none;
-  &:hover {
-  }
-`
 
 export const Nav = () => {
   return (
@@ -28,13 +20,9 @@ export const Nav = () => {
         <img className="logo" src={logo} />
         <Header>NC Games</Header>
       </Link>
-      <Link to="/categories">
-        <NavLink>Categories</NavLink>
-      </Link>
+      <Link to="/categories">Categories</Link>
       <Link to="/users">
-        <NavLink>
-          <i className="fas fa-users"></i>
-        </NavLink>
+        <i className="fas fa-users"></i>
       </Link>
     </Container>
   )

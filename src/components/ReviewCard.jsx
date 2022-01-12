@@ -8,12 +8,14 @@ const CardContainer = styled.div`
 export const ReviewCard = ({ review }) => {
   return (
     <>
-      <CardContainer>
-        <h2> {review.title}</h2>
-        <p>Author: {review.owner}</p>
-        <p>Game Designer: {review.designer}</p>
-        <p>Review votes: {review.votes}</p>
-      </CardContainer>
+      <Link to={`/reviews/${review.review_id}`}>
+        <CardContainer>
+          <h2> {review.title}</h2>
+          <p>Author: {review.owner}</p>
+          <p>Game Designer: {review.designer}</p>
+          <p>Review votes: {review.votes}</p>
+        </CardContainer>
+      </Link>
     </>
   )
 }

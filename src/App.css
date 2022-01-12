@@ -13,3 +13,10 @@
 .review-img {
   max-width: 100%;
 }
+
+a {
+  color: #86c232;
+  margin: 8px;
+  font-size: 1.5rem;
+  text-decoration: none;
+}

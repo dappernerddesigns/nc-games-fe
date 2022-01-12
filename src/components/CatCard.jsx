@@ -7,14 +7,19 @@ const CardContainer = styled.div`
 `
 const Header = styled.h2`
   text-transform: capitalize;
+  color: #222629;
 `
+const Paragraph = styled.p`
+  color: #222629;
+`
+
 export const CatCard = ({ cat }) => {
   return (
     <>
       <Link to={`/reviews?category=${cat.slug}`}>
         <CardContainer>
           <Header>{cat.slug}</Header>
-          <p>{cat.description}</p>
+          <Paragraph>{cat.description}</Paragraph>
         </CardContainer>
       </Link>
     </>

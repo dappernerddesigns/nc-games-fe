@@ -11,7 +11,6 @@ export const Reviews = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const category = searchParams.get('category')
-  console.log(category)
 
   useEffect(() => {
     if (category) {

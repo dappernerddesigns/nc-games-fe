@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { useState, useEffect } from 'react'
 import { ReviewByID } from '../utils/api'
 import Loading from '../img/loading.svg'
@@ -27,7 +27,7 @@ export const Review = () => {
       setShowComment(false)
     }
   }
-
+  console.log(OneReview.votes)
   return (
     <>
       {isLoading ? (

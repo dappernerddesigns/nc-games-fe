@@ -40,9 +40,11 @@ export const CommentsByReview = (reviewID) => {
   })
 }
 
-export const ReviewVotes = (reviewID) => {
-  return gamesApi.patch(`/reviews/${reviewID}`).then((res) => {
-    console.log(res.data.reviews[0].votes)
-    return res.data.reviews[0]
-  })
+export const ReviewVotes = (reviewID, num) => {
+  return gamesApi
+    .patch(`/reviews/${reviewID}`, { inc_votes: num })
+    .then((res) => {
+      console.log(res.data.reviews[0].votes)
+      return res.data.reviews[0].votes
+    })
 }

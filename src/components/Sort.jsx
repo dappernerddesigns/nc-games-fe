@@ -8,7 +8,6 @@ export const Sort = () => {
   }
   return (
     <div>
-      {' '}
       <p>Sort:</p>
       <select defaultValue={value} onChange={handleChange}>
         <option value="time">Date Newest</option>

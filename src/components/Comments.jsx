@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { CommentsByReview, AddComment } from '../utils/api'
+import { useParams } from 'react-router-dom'
+import { CommentsByReview, AddComment, RemoveComment } from '../utils/api'
 import { CommentCard } from './CommentCard'
 import Loading from '../img/loading.svg'
 import { PostComment } from './PostComment'
@@ -15,6 +15,7 @@ export const Comments = () => {
 
   const [comments, setComments] = useState({})
   const [isLoading, setIsLoading] = useState(true)
+  const loggedInUser = 'jessjelly'
 
   useEffect(() => {
     CommentsByReview(review_id).then((res) => {
@@ -24,19 +25,37 @@ export const Comments = () => {
   }, [review_id])
 
   const addComment = (text) => {
-    console.log('user commented>>', text)
+    setIsLoading(true)
+
     AddComment(review_id, text)
       .then((res) => {
         setComments((currentComments) => {
-          return [res, ...currentComments]
+          return [res[0], ...currentComments]
         })
+        setIsLoading(false)
       })
       .catch((err) => {
-        console.log(err, '<<<errors')
+        console.log(err)
       })
   }
 
-  console.log(comments)
+  const deleteComment = (comment_id) => {
+    setIsLoading(true)
+    RemoveComment(comment_id)
+      .then((res) => {
+        console.log(res)
+        const newComments = comments.filter(
+          (comment) => comment.comment_id !== comment_id,
+        )
+        setComments(newComments)
+
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
     <>
       {isLoading ? (
@@ -50,7 +69,12 @@ export const Comments = () => {
             <ul>
               {comments.map((comment) => {
                 return (
-                  <CommentCard comment={comment} key={comment.comment_id} />
+                  <CommentCard
+                    comment={comment}
+                    user={loggedInUser}
+                    key={comment.comment_id}
+                    handleClick={deleteComment}
+                  />
                 )
               })}
             </ul>

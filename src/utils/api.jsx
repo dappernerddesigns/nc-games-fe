@@ -55,7 +55,6 @@ export const ReviewVotes = (reviewID, num) => {
 }
 
 export const AddComment = (reviewID, comment) => {
-  console.log(reviewID)
   return gamesApi
     .post(`/reviews/${reviewID}/comments`, {
       username: 'jessjelly',
@@ -67,4 +66,10 @@ export const AddComment = (reviewID, comment) => {
     .catch((err) => {
       console.dir(err)
     })
+}
+
+export const RemoveComment = (comment_id) => {
+  return gamesApi.delete(`/comments/${comment_id}`).then((res) => {
+    return res.data
+  })
 }

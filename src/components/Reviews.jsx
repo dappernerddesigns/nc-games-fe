@@ -35,7 +35,7 @@ export const Reviews = () => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [searchParams] = useSearchParams()
-
+  const [query, setQuery] = useState('')
   const category = searchParams.get('category')
 
   useEffect(() => {

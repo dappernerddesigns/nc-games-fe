@@ -40,7 +40,10 @@ const CommentVotes = styled.div`
   grid-area: 2 / 1 / 3 / 2;
 `
 
-export const CommentCard = ({ comment }) => {
+export const CommentCard = ({ comment, user, handleClick }) => {
+  const deleteCom = () => {
+    handleClick(comment.comment_id)
+  }
   return (
     <CommentDisplay>
       <UserName>
@@ -58,6 +61,9 @@ export const CommentCard = ({ comment }) => {
           {comment.votes} <i className="fas fa-arrow-down"></i>
         </p>
       </CommentVotes>
+      {user === comment.author ? (
+        <button onClick={deleteCom}>Delete</button>
+      ) : null}
     </CommentDisplay>
   )
 }

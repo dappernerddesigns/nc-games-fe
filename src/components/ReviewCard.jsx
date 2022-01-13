@@ -42,6 +42,7 @@ export const ReviewCard = ({ review }) => {
             <p>Author: {review.owner}</p>
             <p>Game Designer: {review.designer}</p>
             <p>Review votes: {review.votes}</p>
+            <p>{review.comment_count} comments</p>
           </CardContents>
         </CardContainer>
       </Link>

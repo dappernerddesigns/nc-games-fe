@@ -54,6 +54,9 @@ export const CommentCard = ({ comment, user, handleClick }) => {
       </UserAvatar>
       <UserComment>
         <p>{comment.body}</p>
+        {user === comment.author ? (
+          <button onClick={deleteCom}>Delete</button>
+        ) : null}
       </UserComment>
       <CommentVotes>
         <p>
@@ -61,9 +64,6 @@ export const CommentCard = ({ comment, user, handleClick }) => {
           {comment.votes} <i className="fas fa-arrow-down"></i>
         </p>
       </CommentVotes>
-      {user === comment.author ? (
-        <button onClick={deleteCom}>Delete</button>
-      ) : null}
     </CommentDisplay>
   )
 }

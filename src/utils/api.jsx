@@ -16,13 +16,7 @@ export const AllReviews = () => {
   })
 }
 
-export const AllReviewsByCat = (category) => {
-  return gamesApi.get(`/reviews?category=${category}`).then((res) => {
-    return res.data.reviews
-  })
-}
-
-export const SortReviews = (query) => {
+export const AllReviewsByQuery = (query) => {
   return gamesApi.get(`/reviews${query}`).then((res) => {
     return res.data.reviews
   })

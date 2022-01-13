@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { AllReviews, AllReviewsByCat } from '../utils/api'
+import { Link, useLocation } from 'react-router-dom'
+import { AllReviews, AllReviewsByQuery } from '../utils/api'
 import { ReviewCard } from './ReviewCard'
 import Loading from '../img/loading.svg'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Sort } from './Sort'
 
@@ -35,22 +35,25 @@ export const Reviews = () => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [searchParams] = useSearchParams()
-  const [query, setQuery] = useState('')
+
   const category = searchParams.get('category')
 
+  const query = useLocation()
+
   useEffect(() => {
-    if (category) {
-      AllReviewsByCat(category).then((res) => {
+    if (query.search) {
+      AllReviewsByQuery(query.search).then((res) => {
         setIsLoading(false)
         setReviews(res)
       })
-    } else {
+    } else
       AllReviews().then((res) => {
         setIsLoading(false)
         setReviews(res)
       })
-    }
-  }, [category])
+  }, [query])
+
+  const sortBy = () => {}
 
   return (
     <>
@@ -58,7 +61,6 @@ export const Reviews = () => {
         <img src={Loading} />
       ) : (
         <div>
-          <Sort />
           {category ? (
             <Header>
               Reviews for <Span>{category} games</Span>
@@ -66,6 +68,7 @@ export const Reviews = () => {
           ) : (
             <Header>All game reviews</Header>
           )}
+          <Sort query={query.search} />
           <List>
             <ul>
               {reviews.map((review) => {

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { AllReviews, AllReviewsByQuery } from '../utils/api'
+import { AllReviewsByQuery } from '../utils/api'
 import { ReviewCard } from './ReviewCard'
 import Loading from '../img/loading.svg'
-import { useSearchParams, useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Sort } from './Sort'
 
@@ -34,26 +34,30 @@ const Button = styled.button`
 export const Reviews = () => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState('')
   const [searchParams] = useSearchParams()
 
   const category = searchParams.get('category')
 
   const query = useLocation()
+  console.log(query.search)
+
+  function handleChange(e) {
+    if (query.search.includes('category')) {
+      setData(`${query.search}&${e.target.value}`)
+    } else {
+      console.log('in the else block')
+      setData(`?${e.target.value}`)
+    }
+  }
 
   useEffect(() => {
-    if (query.search) {
-      AllReviewsByQuery(query.search).then((res) => {
-        setIsLoading(false)
-        setReviews(res)
-      })
-    } else
-      AllReviews().then((res) => {
-        setIsLoading(false)
-        setReviews(res)
-      })
-  }, [query])
-
-  const sortBy = () => {}
+    console.log('refreshing list')
+    AllReviewsByQuery(data).then((res) => {
+      setIsLoading(false)
+      setReviews(res)
+    })
+  }, [data])
 
   return (
     <>
@@ -68,7 +72,7 @@ export const Reviews = () => {
           ) : (
             <Header>All game reviews</Header>
           )}
-          <Sort query={query.search} />
+          <Sort dropChange={handleChange} />
           <List>
             <ul>
               {reviews.map((review) => {

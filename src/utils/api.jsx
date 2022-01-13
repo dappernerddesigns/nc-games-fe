@@ -18,6 +18,7 @@ export const AllReviews = () => {
 
 export const AllReviewsByQuery = (query) => {
   return gamesApi.get(`/reviews${query}`).then((res) => {
+    console.log(res.data.reviews)
     return res.data.reviews
   })
 }

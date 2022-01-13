@@ -40,13 +40,11 @@ export const Reviews = () => {
   const category = searchParams.get('category')
 
   const query = useLocation()
-  console.log(query.search)
 
   function handleChange(e) {
     if (query.search.includes('category')) {
       setData(`${query.search}&${e.target.value}`)
     } else {
-      console.log('in the else block')
       setData(`?${e.target.value}`)
     }
   }

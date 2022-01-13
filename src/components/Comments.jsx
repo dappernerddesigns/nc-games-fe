@@ -43,7 +43,6 @@ export const Comments = () => {
     setIsLoading(true)
     RemoveComment(comment_id)
       .then((res) => {
-        console.log(res)
         const newComments = comments.filter(
           (comment) => comment.comment_id !== comment_id,
         )

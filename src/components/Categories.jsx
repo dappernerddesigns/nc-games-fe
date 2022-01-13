@@ -6,7 +6,14 @@ import Loading from '../img/loading.svg'
 import styled from 'styled-components'
 
 const CatDisplay = styled.div``
-
+const Button = styled.button`
+  background-color: #ee6c1b;
+  border: none;
+  color: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 12px;
+`
 export const Categories = () => {
   const [cats, setCat] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -23,7 +30,7 @@ export const Categories = () => {
         <img src={Loading} />
       ) : (
         <CatDisplay>
-          <h1>Reviews by Category</h1>
+          <h1>Categories</h1>
           <ul>
             {cats.map((cat) => {
               return <CatCard cat={cat} key={cat.slug} />
@@ -31,7 +38,7 @@ export const Categories = () => {
           </ul>
 
           <Link to="/">
-            <button>Home</button>
+            <Button>Home</Button>
           </Link>
         </CatDisplay>
       )}

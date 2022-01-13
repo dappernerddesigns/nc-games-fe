@@ -22,6 +22,12 @@ export const AllReviewsByCat = (category) => {
   })
 }
 
+export const SortReviews = (query) => {
+  return gamesApi.get(`/reviews${query}`).then((res) => {
+    return res.data.reviews
+  })
+}
+
 export const AllUsers = () => {
   return gamesApi.get(`/users`).then((res) => {
     return res.data.users
@@ -49,13 +55,16 @@ export const ReviewVotes = (reviewID, num) => {
 }
 
 export const AddComment = (reviewID, comment) => {
+  console.log(reviewID)
   return gamesApi
     .post(`/reviews/${reviewID}/comments`, {
       username: 'jessjelly',
       body: comment,
     })
     .then((res) => {
-      console.log(res.data)
       return res.data.comments
+    })
+    .catch((err) => {
+      console.dir(err)
     })
 }

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import avatar from '../img/avatar.png'
 
 const CommentDisplay = styled.div`
   background-color: white;
@@ -11,18 +12,52 @@ const CommentDisplay = styled.div`
   border-radius: 1rem;
   margin: 15px;
   padding: 12px;
+  width: 85%;
+  display: grid;
+  grid-template-columns: 15% auto;
+  grid-template-rows: 15% auto;
+  grid-column-gap: 10px;
+  grid-row-gap: 4px;
+`
+const UserName = styled.div`
+  grid-area: 1 / 2 / 2 / 3;
+`
+
+const UserAvatar = styled.div`
+  grid-area: 1 / 1 / 2 / 2;
+`
+
+const AVImg = styled.img`
+  grid-area: 1 / 1 / 2 / 2;
+  object-fit: cover;
+  max-width: 40px;
+`
+
+const UserComment = styled.div`
+  grid-area: 2 / 2 / 4 / 3;
+`
+const CommentVotes = styled.div`
+  grid-area: 2 / 1 / 3 / 2;
 `
 
 export const CommentCard = ({ comment }) => {
   return (
     <CommentDisplay>
-      <p>User: {comment.author}</p>
-      <p>{comment.body}</p>
-
-      <p>
-        <i className="fas fa-arrow-up"></i>
-        {comment.votes} <i className="fas fa-arrow-down"></i>
-      </p>
+      <UserName>
+        <p>User: {comment.author}</p>
+      </UserName>
+      <UserAvatar>
+        <AVImg src={avatar} />
+      </UserAvatar>
+      <UserComment>
+        <p>{comment.body}</p>
+      </UserComment>
+      <CommentVotes>
+        <p>
+          <i className="fas fa-arrow-up"></i>
+          {comment.votes} <i className="fas fa-arrow-down"></i>
+        </p>
+      </CommentVotes>
     </CommentDisplay>
   )
 }

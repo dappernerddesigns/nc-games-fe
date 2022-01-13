@@ -5,6 +5,7 @@ import { ReviewByID } from '../utils/api'
 import Loading from '../img/loading.svg'
 import { Comments } from './Comments'
 import { Votes } from './Votes'
+import avatar from '../img/avatar.png'
 
 const VoteDisplay = styled.div`
   border: 1px solid red;
@@ -28,7 +29,7 @@ const MainReview = styled.div`
   margin-top: 15px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: 50px auto;
   grid-column-gap: 6px;
   grid-row-gap: 6px;
 `
@@ -40,19 +41,19 @@ const UpVoteDisplay = styled.div`
 `
 const Title = styled.div`
   grid-area: 1 / 2 / 2 / 5;
-  border: 1px solid red;
+
   margin: 0;
   padding: 0;
 `
 const ImgContainer = styled.div`
-  grid-area: 2 / 2 / 4 / 4;
-  border: 1px solid red;
+  grid-area: 2 / 2 / 4 / 5;
+
   margin: 0;
   padding: 0;
 `
 const ReviewBody = styled.div`
-  grid-area: 4 / 2 / 6 / 4;
-  border: 1px solid red;
+  grid-area: 4 / 2 / 6 / 5;
+
   margin: 0;
   padding: 0;
 `
@@ -62,8 +63,21 @@ const UserAvatar = styled.div`
   margin: 0;
   padding: 0;
 `
+const AVImg = styled.img`
+  grid-area: 4 / 1 / 5 / 2;
+  object-fit: cover;
+  max-width: 70px;
+`
 const CommentsContainer = styled.div``
 
+const Button = styled.button`
+  background-color: #ee6c1b;
+  border: none;
+  color: white;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 12px;
+`
 export const Review = () => {
   const params = useParams()
 
@@ -115,19 +129,21 @@ export const Review = () => {
 
               <p>Comments: {OneReview.comment_count}</p>
             </ReviewBody>
-            <UserAvatar></UserAvatar>
+            <UserAvatar>
+              <AVImg src={avatar} />
+            </UserAvatar>
           </MainReview>
           <CommentsContainer>
             {showComment ? null : (
-              <button onClick={isClicked}>Show comments</button>
+              <Button onClick={isClicked}>Show comments</Button>
             )}
             {showComment ? (
-              <button onClick={isClicked}>Hide comments</button>
+              <Button onClick={isClicked}>Hide comments</Button>
             ) : null}
             {showComment ? <Comments /> : null}
           </CommentsContainer>
           <Link to="/">
-            <button>Home</button>
+            <Button>Home</Button>
           </Link>
         </div>
       )}

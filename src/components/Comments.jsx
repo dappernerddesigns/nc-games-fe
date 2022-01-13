@@ -6,6 +6,10 @@ import Loading from '../img/loading.svg'
 import { PostComment } from './PostComment'
 import styled from 'styled-components'
 
+const CommentContainer = styled.div`
+  padding: 0;
+`
+
 export const Comments = () => {
   const { review_id } = useParams()
 
@@ -17,14 +21,22 @@ export const Comments = () => {
       setComments(res)
       setIsLoading(false)
     })
-  }, [])
+  }, [review_id])
 
   const addComment = (text) => {
     console.log('user commented>>', text)
-    AddComment(review_id, text).then((res) => {
-      setComments([res, ...comments])
-    })
+    AddComment(review_id, text)
+      .then((res) => {
+        setComments((currentComments) => {
+          return [res, ...currentComments]
+        })
+      })
+      .catch((err) => {
+        console.log(err, '<<<errors')
+      })
   }
+
+  console.log(comments)
   return (
     <>
       {isLoading ? (
@@ -34,7 +46,7 @@ export const Comments = () => {
           <div className="comments-form">
             <PostComment submitLabel="Write" handleSubmit={addComment} />
           </div>
-          <div>
+          <CommentContainer>
             <ul>
               {comments.map((comment) => {
                 return (
@@ -42,7 +54,7 @@ export const Comments = () => {
                 )
               })}
             </ul>
-          </div>
+          </CommentContainer>
         </div>
       )}
     </>

@@ -7,7 +7,7 @@ import { Categories } from './components/Categories'
 import { Reviews } from './components/Reviews'
 import { Review } from './components/Review'
 import { Users } from './components/Users'
-import { Comments } from './components/Comments'
+import { ErrorPage } from './components/ErrorPage'
 import styled, { css } from 'styled-components'
 
 const AppStyles = styled.div``
@@ -21,8 +21,8 @@ function App() {
           <Route path="/categories" element={<Categories />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/reviews/:review_id" element={<Review />} />
-          <Route path="/reviews/:review_id/comments" element={<Comments />} />
           <Route path="/users" element={<Users />} />
+          <Route path="*" element={ErrorPage} />
         </Routes>
       </AppStyles>
     </BrowserRouter>

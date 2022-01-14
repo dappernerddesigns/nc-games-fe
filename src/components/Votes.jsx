@@ -1,6 +1,22 @@
 import { useState } from 'react'
 import { ReviewVotes } from '../utils/api'
+import styled from 'styled-components'
 
+const VoteCount = styled.h2`
+  font-size: 2rem;
+
+  margin: 0;
+  padding: 0;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  text-align: center;
+`
+
+const Icon = styled.i`
+  font-size: 2.5rem;
+
+  color: #ee6c1b;
+`
 export const Votes = ({ votes, review_id }) => {
   const [userVotes, setUserVotes] = useState(votes)
 
@@ -17,11 +33,11 @@ export const Votes = ({ votes, review_id }) => {
   return (
     <div>
       <span className="votes" onClick={upVote}>
-        <i className="fas fa-arrow-up"></i>
+        <Icon className="fas fa-arrow-up" />
       </span>
-      <p>{userVotes}</p>
+      <VoteCount>{userVotes}</VoteCount>
       <span className="votes" onClick={downVote}>
-        <i className="fas fa-arrow-down"></i>
+        <Icon className="fas fa-arrow-down" />
       </span>
     </div>
   )

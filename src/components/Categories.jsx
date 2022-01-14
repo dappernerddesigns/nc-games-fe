@@ -5,7 +5,16 @@ import { AllCategories } from '../utils/api'
 import Loading from '../img/loading.svg'
 import styled from 'styled-components'
 
-const CatDisplay = styled.div``
+const CatDisplay = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+`
+const Header = styled.h1`
+  font-size: 2rem;
+  text-align: center;
+`
 const Button = styled.button`
   background-color: #ee6c1b;
   border: none;
@@ -13,6 +22,25 @@ const Button = styled.button`
   padding: 15px;
   margin: 10px;
   border-radius: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  &:hover {
+    background-color: transparent;
+    border: 4px solid white;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+`
+const LoadingSpin = styled.img`
+  max-width: 400px;
+  position: absolute;
+  top: 25%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 `
 export const Categories = () => {
   const [cats, setCat] = useState([])
@@ -27,17 +55,17 @@ export const Categories = () => {
   return (
     <>
       {isLoading ? (
-        <img src={Loading} />
+        <LoadingSpin src={Loading} />
       ) : (
         <CatDisplay>
-          <h1>Categories</h1>
+          <Header>Categories</Header>
           <ul>
             {cats.map((cat) => {
               return <CatCard cat={cat} key={cat.slug} />
             })}
           </ul>
 
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <Button>Home</Button>
           </Link>
         </CatDisplay>

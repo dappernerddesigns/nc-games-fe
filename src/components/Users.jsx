@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { AllUsers } from '../utils/api'
+import { GetUser } from '../utils/api'
 import Loading from '../img/loading.svg'
+import { UserCards } from './UserCards'
 
-export const Users = () => {
+export const Users = ({ userName }) => {
   const [users, setUsers] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    AllUsers().then((allTheUsers) => {
+    GetUser(userName).then((allTheUsers) => {
       setIsLoading(false)
       setUsers(allTheUsers)
       console.log(allTheUsers)
@@ -21,9 +22,9 @@ export const Users = () => {
       ) : (
         <div>
           <ul>
-            {/* {users.map((user) => {
-              return <p>{user.username}</p>
-            })} */}
+            {users.map((user) => {
+              return <UserCards user={user} key={user.user_id} />
+            })}
           </ul>
         </div>
       )}

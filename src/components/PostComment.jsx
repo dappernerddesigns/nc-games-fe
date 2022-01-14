@@ -37,11 +37,15 @@ export const PostComment = ({ submitLabel, handleSubmit }) => {
 
   return (
     <PostBox>
-      <p>Username :</p>
+      <p>Username : jessjelly</p>
       <form onSubmit={onSubmit}>
-        <Textarea value={text} onChange={(e) => setText(e.target.value)} />
+        <Textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          required
+        />
 
-        <Button disabled={isBoxDisabled}>{submitLabel}</Button>
+        <Button>{submitLabel}</Button>
       </form>
     </PostBox>
   )

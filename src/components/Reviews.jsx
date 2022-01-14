@@ -29,8 +29,26 @@ const Button = styled.button`
   padding: 15px;
   margin: 10px;
   border-radius: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  &:hover {
+    background-color: transparent;
+    border: 4px solid white;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
 `
-
+const LoadingSpin = styled.img`
+  max-width: 400px;
+  position: absolute;
+  top: 25%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`
 export const Reviews = () => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -50,7 +68,6 @@ export const Reviews = () => {
   }
 
   useEffect(() => {
-    console.log('refreshing list')
     AllReviewsByQuery(data).then((res) => {
       setIsLoading(false)
       setReviews(res)
@@ -60,7 +77,7 @@ export const Reviews = () => {
   return (
     <>
       {isLoading ? (
-        <img src={Loading} />
+        <LoadingSpin src={Loading} />
       ) : (
         <div>
           {category ? (
@@ -78,7 +95,7 @@ export const Reviews = () => {
               })}
             </ul>
           </List>
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <Button>Home</Button>
           </Link>
         </div>

@@ -10,21 +10,21 @@ export const AllCategories = () => {
   })
 }
 
-export const AllReviews = () => {
-  return gamesApi.get(`/reviews`).then((res) => {
-    return res.data.reviews
-  })
-}
-
 export const AllReviewsByQuery = (query) => {
   return gamesApi.get(`/reviews${query}`).then((res) => {
-    console.log(res.data.reviews)
     return res.data.reviews
   })
 }
 
 export const AllUsers = () => {
   return gamesApi.get(`/users`).then((res) => {
+    return res.data.users
+  })
+}
+
+export const GetUser = (user) => {
+  return gamesApi.get(`/users/${user}`).then((res) => {
+    console.log(res.data)
     return res.data.users
   })
 }
@@ -46,6 +46,14 @@ export const ReviewVotes = (reviewID, num) => {
     .patch(`/reviews/${reviewID}`, { inc_votes: num })
     .then((res) => {
       return res.data.reviews[0].votes
+    })
+}
+
+export const commentVoting = (commentID, num) => {
+  return gamesApi
+    .patch(`/comments/${commentID}`, { inc_votes: num })
+    .then((res) => {
+      return res.data.comments
     })
 }
 

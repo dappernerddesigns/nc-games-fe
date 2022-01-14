@@ -23,9 +23,22 @@ const Button = styled.button`
   margin: 10px;
   border-radius: 12px;
 `
+const Icon = styled.i`
+  color: white;
+  font-size: 30px;
+  margin: 16px;
+`
+const Header = styled.h1`
+  font-weight: bold;
+  text-align: center;
+  color: #061826;
+  font-size: 2rem;
+`
+
 export const Home = () => {
   return (
     <Container>
+      <Header>NC Games</Header>
       <p>
         A little corner of the internet where we take games and decide if we
         like them or not!
@@ -34,10 +47,16 @@ export const Home = () => {
         Pick a category of game to get started, or just pile into our reviews!
       </p>
       <Link to="/categories">
-        <Button>Show me categories!</Button>
+        <Button>
+          <Icon className="fas fa-folder-open" />
+          Show me categories!
+        </Button>
       </Link>
       <Link to="/reviews">
-        <Button>Let me at everything!</Button>
+        <Button>
+          <Icon className="fas fa-dice-d20" />
+          Let me at everything!
+        </Button>
       </Link>
     </Container>
   )

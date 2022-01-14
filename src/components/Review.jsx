@@ -6,17 +6,12 @@ import Loading from '../img/loading.svg'
 import { Comments } from './Comments'
 import { Votes } from './Votes'
 import avatar from '../img/avatar.png'
+import { ErrorPage } from './ErrorPage'
+import { dateFormat } from '../utils/utilFunctions'
 
-const VoteDisplay = styled.div`
-  border: 1px solid red;
-
-  padding-left: 5%;
-  padding-right: 5%;
-  margin: none;
-
-  font-size: 1.2rem;
+const HeroImg = styled.img`
+  border-radius: 12px;
 `
-const HeroImg = styled.img``
 const MainReview = styled.div`
   background-color: white;
   background: linear-gradient(
@@ -35,9 +30,11 @@ const MainReview = styled.div`
 `
 const UpVoteDisplay = styled.div`
   grid-area: 1 / 1 / 3 / 2;
-  border: 1px solid red;
+
   margin: 0;
   padding: 0;
+  justify-self: center;
+  align-self: center;
 `
 const Title = styled.div`
   grid-area: 1 / 2 / 2 / 5;
@@ -49,7 +46,7 @@ const ImgContainer = styled.div`
   grid-area: 2 / 2 / 4 / 5;
 
   margin: 0;
-  padding: 0;
+  padding-right: 6px;
 `
 const ReviewBody = styled.div`
   grid-area: 4 / 2 / 6 / 5;
@@ -57,16 +54,15 @@ const ReviewBody = styled.div`
   margin: 0;
   padding: 0;
 `
-const UserAvatar = styled.div`
-  grid-area: 4 / 1 / 5 / 2;
-  border: 1px solid red;
-  margin: 0;
-  padding: 0;
-`
+
 const AVImg = styled.img`
   grid-area: 4 / 1 / 5 / 2;
   object-fit: cover;
   max-width: 70px;
+  max-height: 70px;
+  justify-self: center;
+  border: 1px solid red;
+  border-radius: 50%;
 `
 const CommentsContainer = styled.div``
 
@@ -78,18 +74,27 @@ const Button = styled.button`
   margin: 10px;
   border-radius: 12px;
 `
+
+const Span = styled.span`
+  font-weight: bold;
+`
 export const Review = () => {
   const params = useParams()
 
   const [isLoading, setIsLoading] = useState(true)
   const [OneReview, setOneReview] = useState({})
   const [showComment, setShowComment] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    ReviewByID(params.review_id).then((result) => {
-      setIsLoading(false)
-      setOneReview(result)
-    })
+    ReviewByID(params.review_id)
+      .then((result) => {
+        setIsLoading(false)
+        setOneReview(result)
+      })
+      .catch((err) => {
+        setError({ err })
+      })
   }, [params.review_id])
 
   function isClicked() {
@@ -99,6 +104,12 @@ export const Review = () => {
       setShowComment(false)
     }
   }
+  if (error) {
+    let errorStatus = error.err.response.status
+    return <ErrorPage message={errorStatus} />
+  }
+
+  let date = dateFormat(OneReview.created_at)
 
   return (
     <>
@@ -123,16 +134,26 @@ export const Review = () => {
             </ImgContainer>
 
             <ReviewBody>
-              <p>Contributor: {OneReview.owner}</p>
-              <p>Game Designer: {OneReview.designer}</p>
+              <p>
+                <Span>Contributor: </Span>
+                {OneReview.owner}
+              </p>
+              <p>
+                <Span>Game Designer: </Span>
+                {OneReview.designer}
+              </p>
+              <p>
+                <Span>Posted: </Span>
+                {date}
+              </p>
               <p>{OneReview.review_body}</p>
 
               <p>Comments: {OneReview.comment_count}</p>
             </ReviewBody>
-            <UserAvatar>
-              <AVImg src={avatar} />
-            </UserAvatar>
+
+            <AVImg src={avatar} />
           </MainReview>
+
           <CommentsContainer>
             {showComment ? null : (
               <Button onClick={isClicked}>Show comments</Button>
@@ -140,7 +161,9 @@ export const Review = () => {
             {showComment ? (
               <Button onClick={isClicked}>Hide comments</Button>
             ) : null}
-            {showComment ? <Comments /> : null}
+            {showComment ? (
+              <Comments commentCount={OneReview.comment_count} />
+            ) : null}
           </CommentsContainer>
           <Link to="/">
             <Button>Home</Button>

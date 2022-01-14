@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom'
+import { GetUser, commentVotes } from '../utils/api'
 import styled from 'styled-components'
 import avatar from '../img/avatar.png'
+import { useState, useEffect } from 'react'
+import { CommentVotes } from './CommentVotes'
 
 const CommentDisplay = styled.div`
   background-color: white;
@@ -36,14 +38,22 @@ const AVImg = styled.img`
 const UserComment = styled.div`
   grid-area: 2 / 2 / 4 / 3;
 `
-const CommentVotes = styled.div`
+const ShowCommentVotes = styled.div`
   grid-area: 2 / 1 / 3 / 2;
 `
 
 export const CommentCard = ({ comment, user, handleClick }) => {
+  const [userName, setUserName] = useState([])
+
+  useEffect(() => {
+    GetUser(comment.author).then((res) => {
+      setUserName(res)
+    })
+  }, [comment.author])
   const deleteCom = () => {
     handleClick(comment.comment_id)
   }
+
   return (
     <CommentDisplay>
       <UserName>
@@ -58,12 +68,12 @@ export const CommentCard = ({ comment, user, handleClick }) => {
           <button onClick={deleteCom}>Delete</button>
         ) : null}
       </UserComment>
-      <CommentVotes>
-        <p>
-          <i className="fas fa-arrow-up"></i>
-          {comment.votes} <i className="fas fa-arrow-down"></i>
-        </p>
-      </CommentVotes>
+      <ShowCommentVotes>
+        <CommentVotes
+          comment_id={comment.comment_id}
+          commentVotes={comment.votes}
+        />
+      </ShowCommentVotes>
     </CommentDisplay>
   )
 }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const CardContainer = styled.div`
   background-color: white;
@@ -12,23 +12,26 @@ const CardContainer = styled.div`
   margin-bottom: 20px;
   padding: 15px;
   width: 85%;
+  &:hover {
+    box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.53);
+  }
 `
 const Header = styled.h2`
   text-transform: capitalize;
-  color: #222629;
   text-align: center;
-`
-const Paragraph = styled.p`
-  color: #222629;
+  font-size: 1.5rem;
 `
 
 export const CatCard = ({ cat }) => {
   return (
     <>
-      <Link to={`/reviews?category=${cat.slug}`}>
+      <Link
+        to={`/reviews?category=${cat.slug}`}
+        style={{ textDecoration: 'none' }}
+      >
         <CardContainer>
           <Header>{cat.slug}</Header>
-          {<Paragraph>{cat.description}</Paragraph>}
+          {<p>{cat.description}</p>}
         </CardContainer>
       </Link>
     </>

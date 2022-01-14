@@ -1,11 +1,8 @@
 export const Sort = ({ dropChange }) => {
   return (
     <div>
-      <p>Sort:</p>
-      <select
-        defaultValue={'sort_by=created_at&order=DESC'}
-        onChange={dropChange}
-      >
+      <select defaultValue={'Sort'} onChange={dropChange}>
+        <option>Sort...</option>
         <option value="sort_by=created_at&order=DESC">Date Newest</option>
         <option value="sort_by=created_at&order=ASC">Date Oldest</option>
         <option value="sort_by=comment_count&order=ASC">

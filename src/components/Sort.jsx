@@ -1,7 +1,15 @@
+import styled from 'styled-components'
+
+const SortBox = styled.select`
+  margin-left: 20px;
+  border: none;
+  height: 40px;
+`
+
 export const Sort = ({ dropChange }) => {
   return (
     <div>
-      <select defaultValue={'Sort'} onChange={dropChange}>
+      <SortBox defaultValue={'Sort'} onChange={dropChange}>
         <option>Sort...</option>
         <option value="sort_by=created_at&order=DESC">Date Newest</option>
         <option value="sort_by=created_at&order=ASC">Date Oldest</option>
@@ -13,7 +21,7 @@ export const Sort = ({ dropChange }) => {
         </option>
         <option value="sort_by=votes&order=ASC">Votes Low-High</option>
         <option value="sort_by=votes&order=DESC">Votes High-Low</option>
-      </select>
+      </SortBox>
     </div>
   )
 }

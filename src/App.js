@@ -7,6 +7,7 @@ import { Categories } from './components/Categories'
 import { Reviews } from './components/Reviews'
 import { Review } from './components/Review'
 import { Users } from './components/Users'
+import { User } from './components/User'
 import { ErrorPage } from './components/ErrorPage'
 import styled, { css } from 'styled-components'
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/reviews/:review_id" element={<Review />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/users/:username" element={<User />} />
           <Route path="*" element={ErrorPage} />
         </Routes>
       </AppStyles>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const Container = styled.div`
   background-color: white;
@@ -13,15 +13,22 @@ const Container = styled.div`
   margin-top: 15px;
   padding: 12px;
   color: #061826;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: space-around;
 `
 
 const Button = styled.button`
   background-color: #ee6c1b;
   border: none;
   color: white;
-  padding: 15px;
+  padding: 10px;
   margin: 10px;
   border-radius: 12px;
+  font-size: 1.5rem;
 `
 const Icon = styled.i`
   color: white;

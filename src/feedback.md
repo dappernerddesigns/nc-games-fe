@@ -8,7 +8,7 @@ Well done Verity! You've got some great functionality in there and your app is r
 - [ ] has a link to the deployed version
 - [x] provides general info about your app
 - [x] includes links to your back end repo
-- [ ] specifies the minimum version of Node required to run locally (check your Node version, `node --version` and use the major version that you are on)
+- [x] specifies the minimum version of Node required to run locally (check your Node version, `node --version` and use the major version that you are on)
 - [x] has clear instructions on how to run your project locally (`git clone <repo-url>, cd ...`)
 
 ## UX

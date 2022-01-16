@@ -24,35 +24,32 @@ const MainReview = styled.div`
   margin-top: 15px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 50px auto;
+  grid-template-rows: auto, 1fr, auto;
   grid-column-gap: 6px;
   grid-row-gap: 6px;
 `
 const UpVoteDisplay = styled.div`
   grid-area: 1 / 1 / 3 / 2;
-
   margin: 0;
   padding: 0;
+  margin-top: 20px;
   justify-self: center;
-  align-self: center;
+  align-self: flex-start;
 `
 const Title = styled.div`
   grid-area: 1 / 2 / 2 / 5;
-
   margin: 0;
   padding: 0;
 `
 const ImgContainer = styled.div`
   grid-area: 2 / 2 / 4 / 5;
-
   margin: 0;
   padding-right: 6px;
 `
 const ReviewBody = styled.div`
   grid-area: 4 / 2 / 6 / 5;
-
   margin: 0;
-  padding: 0;
+  padding-right: 6px;
 `
 
 const AVImg = styled.img`
@@ -61,8 +58,9 @@ const AVImg = styled.img`
   max-width: 70px;
   max-height: 70px;
   justify-self: center;
-  border: 1px solid red;
+  border: 2px solid #222629;
   border-radius: 50%;
+  background-color: white;
 `
 const CommentsContainer = styled.div``
 
@@ -73,10 +71,24 @@ const Button = styled.button`
   padding: 15px;
   margin: 10px;
   border-radius: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  &:hover {
+    background-color: transparent;
+    border: 4px solid white;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
 `
 
 const Span = styled.span`
   font-weight: bold;
+`
+const TitleText = styled.h1`
+  font-size: 2rem;
 `
 export const Review = () => {
   const params = useParams()
@@ -127,7 +139,7 @@ export const Review = () => {
               )}
             </UpVoteDisplay>
             <Title>
-              <h2>{OneReview.title}</h2>
+              <TitleText>{OneReview.title}</TitleText>
             </Title>
             <ImgContainer>
               <HeroImg className="review-img" src={OneReview.review_img_url} />
@@ -165,7 +177,7 @@ export const Review = () => {
               <Comments commentCount={OneReview.comment_count} />
             ) : null}
           </CommentsContainer>
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: 'none' }}>
             <Button>Home</Button>
           </Link>
         </div>

@@ -18,7 +18,8 @@ Hosted Link - https://dappernerddesigns-nc-games.herokuapp.com/api/
 
 ## How to install
 
-This is a public repo and can be forked to your Github account. Once cloned to your machine, open a terminal in the root directory. Before starting the build, run the following script in the terminal:
+This is a public repo and can be forked to your Github account. Please make sure you are running node on version 16.10 or above.
+Once cloned to your machine, open a terminal in the root directory. Before starting the build, run the following script in the terminal:
 
 `npm i`
 

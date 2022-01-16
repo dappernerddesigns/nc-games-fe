@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import {
-  CommentsByReview,
-  AddComment,
-  RemoveComment,
-  commentVotes,
-} from '../utils/api'
+import { CommentsByReview, AddComment, RemoveComment } from '../utils/api'
 import { CommentCard } from './CommentCard'
 import Loading from '../img/loading.svg'
 import { PostComment } from './PostComment'
@@ -13,13 +8,23 @@ import styled from 'styled-components'
 import { ErrorPage } from './ErrorPage'
 
 const CommentContainer = styled.div`
-  padding: 0;
+  background-color: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 1rem;
+  margin: 15px;
+  margin-top: 15px;
+  padding: 12px;
+  text-align: center;
 `
 
 export const Comments = ({ commentCount }) => {
   const { review_id } = useParams()
-  console.log(commentCount)
-  const [comments, setComments] = useState({})
+
+  const [comments, setComments] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const loggedInUser = 'jessjelly'
@@ -65,6 +70,7 @@ export const Comments = ({ commentCount }) => {
         setError({ err })
       })
   }
+
   if (error) {
     return <ErrorPage message={error} />
   }
@@ -73,30 +79,29 @@ export const Comments = ({ commentCount }) => {
       {isLoading ? (
         <img src={Loading} />
       ) : (
+        <div className="comments-form">
+          <PostComment submitLabel="Write" handleSubmit={addComment} />
+        </div>
+      )}
+
+      {commentCount === 0 ? (
+        <CommentContainer>
+          <p>Looks like no one has commented yet, start a conversation!</p>
+        </CommentContainer>
+      ) : (
         <div>
-          <div className="comments-form">
-            <PostComment submitLabel="Write" handleSubmit={addComment} />
-          </div>
-          {commentCount === 0 ? (
-            <CommentContainer>
-              <p>Looks like no one has commented yet, start a conversation!</p>
-            </CommentContainer>
-          ) : (
-            <CommentContainer>
-              <ul>
-                {comments.map((comment) => {
-                  return (
-                    <CommentCard
-                      comment={comment}
-                      user={loggedInUser}
-                      key={comment.comment_id}
-                      handleClick={deleteComment}
-                    />
-                  )
-                })}
-              </ul>
-            </CommentContainer>
-          )}
+          <ul>
+            {comments.map((comment) => {
+              return (
+                <CommentCard
+                  comment={comment}
+                  user={loggedInUser}
+                  key={comment.comment_id}
+                  handleClick={deleteComment}
+                />
+              )
+            })}
+          </ul>
         </div>
       )}
     </>

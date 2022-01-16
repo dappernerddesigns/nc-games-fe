@@ -24,6 +24,7 @@ const Textarea = styled.textarea`
   width: 70%;
   height: 100px;
   border: none;
+  border-radius: 12px;
 `
 export const PostComment = ({ submitLabel, handleSubmit }) => {
   const [text, setText] = useState('')
@@ -32,8 +33,6 @@ export const PostComment = ({ submitLabel, handleSubmit }) => {
     handleSubmit(text)
     setText('')
   }
-
-  const isBoxDisabled = text.length === 0
 
   return (
     <PostBox>

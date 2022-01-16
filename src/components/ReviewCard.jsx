@@ -44,7 +44,7 @@ export const ReviewCard = ({ review }) => {
           <h2> {review.title}</h2>
 
           <CardImg>
-            <img className="thumbnail" src={review.review_img_url} />
+            <img className="thumbnail" src={review.review_img_url} alt="" />
           </CardImg>
           <CardContents>
             <p>Author: {review.owner}</p>

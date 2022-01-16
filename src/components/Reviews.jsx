@@ -77,7 +77,7 @@ export const Reviews = () => {
   return (
     <>
       {isLoading ? (
-        <LoadingSpin src={Loading} />
+        <LoadingSpin src={Loading} alt="" />
       ) : (
         <div>
           {category ? (

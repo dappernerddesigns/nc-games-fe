@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+
 import { AllUsers } from '../utils/api'
 import Loading from '../img/loading.svg'
 import { UserCards } from './UserCards'
@@ -18,7 +18,7 @@ export const Users = () => {
   return (
     <>
       {isLoading ? (
-        <img src={Loading} />
+        <img src={Loading} alt="" />
       ) : (
         <div>
           <ul>

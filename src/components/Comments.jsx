@@ -77,7 +77,7 @@ export const Comments = ({ commentCount }) => {
   return (
     <>
       {isLoading ? (
-        <img src={Loading} />
+        <img src={Loading} alt="" />
       ) : (
         <div className="comments-form">
           <PostComment submitLabel="Write" handleSubmit={addComment} />

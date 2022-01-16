@@ -126,7 +126,7 @@ export const Review = () => {
   return (
     <>
       {isLoading ? (
-        <img src={Loading} />
+        <img src={Loading} alt="" />
       ) : (
         <div>
           <MainReview>
@@ -142,7 +142,11 @@ export const Review = () => {
               <TitleText>{OneReview.title}</TitleText>
             </Title>
             <ImgContainer>
-              <HeroImg className="review-img" src={OneReview.review_img_url} />
+              <HeroImg
+                className="review-img"
+                src={OneReview.review_img_url}
+                alt="user avatar"
+              />
             </ImgContainer>
 
             <ReviewBody>

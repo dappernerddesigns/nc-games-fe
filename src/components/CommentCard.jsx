@@ -1,7 +1,6 @@
-import { GetUser, commentVotes } from '../utils/api'
 import styled from 'styled-components'
 import avatar from '../img/avatar.png'
-import { useState, useEffect } from 'react'
+
 import { CommentVotes } from './CommentVotes'
 
 const CommentDisplay = styled.div`
@@ -43,13 +42,6 @@ const ShowCommentVotes = styled.div`
 `
 
 export const CommentCard = ({ comment, user, handleClick }) => {
-  const [userName, setUserName] = useState([])
-
-  useEffect(() => {
-    GetUser(comment.author).then((res) => {
-      setUserName(res)
-    })
-  }, [comment.author])
   const deleteCom = () => {
     handleClick(comment.comment_id)
   }

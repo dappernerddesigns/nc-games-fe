@@ -9,7 +9,7 @@ import { Review } from './components/Review'
 import { Users } from './components/Users'
 import { User } from './components/User'
 import { ErrorPage } from './components/ErrorPage'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 const AppStyles = styled.div``
 function App() {
